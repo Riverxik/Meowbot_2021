@@ -31,13 +31,13 @@ public class ChatTextExtension extends BaseTextExtension {
         String msg = String.format("%s, %s!", GreetingService.getRandomGreeting(), DBUsers.getNameByChatId(chatId));
         String chat = chatId.toString();
         meowbot.sendMessage(chat, msg);
-        meowbot.sendSticker(chat, EStickers.HI.getFile_id());
+        meowbot.sendSticker(chat, EStickers.HI.getFileId());
     }
 
     private void executeAppeal(Long chatId) {
         String msg = String.format("%s", GreetingService.getRandomResponse());
         String chat = chatId.toString();
         meowbot.sendMessage(chat, msg);
-        meowbot.sendSticker(chat, EStickers.READY_TO_WORK.getFile_id());
+        meowbot.sendSticker(chat, EStickers.READY_TO_WORK.getFileId());
     }
 }

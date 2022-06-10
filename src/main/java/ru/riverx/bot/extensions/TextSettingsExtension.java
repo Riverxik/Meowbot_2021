@@ -20,14 +20,14 @@ public class TextSettingsExtension extends BaseTextExtension{
             DBUsers.addUserCity(chatId, text.substring(10));
             meowbot.sendMessage(chat, "Я запомнил твой город! Теперь можешь узнавать погоду в своём городе просто " +
                     "написав 'погода'");
-            meowbot.sendSticker(chat, EStickers.LIKE_IT.getFile_id());
+            meowbot.sendSticker(chat, EStickers.LIKE_IT.getFileId());
             return true;
         }
         if (txt.startsWith("мой пояс") && txt.length() > 9) {
             String chat = chatId.toString();
             DBUsers.addUserTime(chatId, txt.substring(9));
             meowbot.sendMessage(chat, "Я запомнил твой часовой пояс! Теперь я буду отображать твоё локальное время");
-            meowbot.sendSticker(chat, EStickers.LIKE_IT.getFile_id());
+            meowbot.sendSticker(chat, EStickers.LIKE_IT.getFileId());
             return true;
         }
         return false;

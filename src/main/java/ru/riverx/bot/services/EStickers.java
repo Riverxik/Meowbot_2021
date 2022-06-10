@@ -35,13 +35,13 @@ public enum EStickers {
     LOADING("CAADAgADLy8AAuCjggfKuuxHtaFSxAI"),
     END("CAADAgADMS8AAuCjggfTlOPReZsvDQI");
 
-    private String file_id;
+    private String fileId;
 
-    EStickers(String file_id) {
-        this.file_id = file_id;
+    EStickers(String fileId) {
+        this.fileId = fileId;
     }
 
-    public String getFile_id() {
-        return file_id;
+    public String getFileId() {
+        return fileId;
     }
 }

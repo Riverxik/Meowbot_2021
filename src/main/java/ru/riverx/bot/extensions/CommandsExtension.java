@@ -12,7 +12,8 @@ import java.lang.management.RuntimeMXBean;
  * Created by RiVeRx on 28.04.2021.
  */
 public class CommandsExtension extends BaseTextExtension {
-    private String name, username;
+    private String name;
+    private String username;
 
     public CommandsExtension(Meowbot bot) {
         super(bot);
@@ -43,7 +44,7 @@ public class CommandsExtension extends BaseTextExtension {
                     addNewUser(username, name, chatId);
                     meowbot.sendMessage(chat, String.format("Привет, %s!", username));
                     meowbot.sendMessage(chat, String.format("Теперь я Вас знаю как: %s.\r/info - список моих возможностей", name));
-                    meowbot.sendSticker(chat, EStickers.CAT_SIT.getFile_id());
+                    meowbot.sendSticker(chat, EStickers.CAT_SIT.getFileId());
                 } break;
                 case "info": {
                     String separator = EEmoji.SMALL_ORANGE_DIAMOND.getCode();
@@ -55,7 +56,7 @@ public class CommandsExtension extends BaseTextExtension {
                             "+ /settings - Настройки";
                     helpInfo = helpInfo.replaceAll("[+]+", separator);
                     meowbot.sendMessage(chat, helpInfo);
-                    meowbot.sendSticker(chat, EStickers.CAT_SIT.getFile_id());
+                    meowbot.sendSticker(chat, EStickers.CAT_SIT.getFileId());
                 } break;
                 case "space": {
                     meowbot.sendChatAction(chat, "upload_photo");
@@ -66,7 +67,7 @@ public class CommandsExtension extends BaseTextExtension {
                     meowbot.sendChatAction(chat, "typing");
                     String result = QuoteService.getQuoteOfTheDay();
                     meowbot.sendMessage(chat, result);
-                    meowbot.sendSticker(chat, EStickers.THINKING2.getFile_id());
+                    meowbot.sendSticker(chat, EStickers.THINKING2.getFileId());
                 } break;
                 case "settings": {
                     meowbot.sendMessage(chat, SettingsService.showUserSettings(chatId));
@@ -75,12 +76,12 @@ public class CommandsExtension extends BaseTextExtension {
                 case "stop":
                 case "send": {
                     meowbot.sendMessage(chat, "Команда временно не доступна :>");
-                    meowbot.sendSticker(chat, EStickers.THINKING.getFile_id());
+                    meowbot.sendSticker(chat, EStickers.THINKING.getFileId());
                 } break;
                 case "flag1_off": {
                     DBUsers.setUserTimeFlag(chatId, true);
                     meowbot.sendMessage(chat, "Хорошо, я больше не буду об этом упоминать :3");
-                    meowbot.sendSticker(chat, EStickers.ALL_GOOD.getFile_id());
+                    meowbot.sendSticker(chat, EStickers.ALL_GOOD.getFileId());
                 } break;
                 case "status": {
                     RuntimeMXBean rb = ManagementFactory.getRuntimeMXBean();
@@ -91,7 +92,7 @@ public class CommandsExtension extends BaseTextExtension {
                 default: {
                     if (chatId != Meowbot.CREATOR_CHAT_ID) {
                         meowbot.sendMessage(chat, String.format("Хмм, я пока не знаю команды '%s'", cmd));
-                        meowbot.sendSticker(chat, EStickers.THINKING2.getFile_id());
+                        meowbot.sendSticker(chat, EStickers.THINKING2.getFileId());
                     }
                 } break;
             }

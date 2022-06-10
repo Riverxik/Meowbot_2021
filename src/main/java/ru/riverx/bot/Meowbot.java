@@ -8,7 +8,10 @@ import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.AnswerInlineQuery;
 import org.telegram.telegrambots.meta.api.methods.GetFile;
 import org.telegram.telegrambots.meta.api.methods.send.*;
-import org.telegram.telegrambots.meta.api.methods.updatingmessages.*;
+import org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage;
+import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageCaption;
+import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageReplyMarkup;
+import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
 import org.telegram.telegrambots.meta.api.objects.File;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.api.objects.Message;
@@ -21,7 +24,7 @@ import org.telegram.telegrambots.meta.api.objects.media.InputMedia;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import ru.riverx.bot.extensions.*;
-import ru.riverx.utils.Utils;
+import ru.riverx.utils.BaseUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -288,7 +291,7 @@ public class Meowbot extends TelegramLongPollingBot {
         resultArticle.setDescription("Зашифрует всё что написано капсом ;)");
 
         InputTextMessageContent text = new InputTextMessageContent();
-        text.setMessageText(Utils.encode(query));
+        text.setMessageText(BaseUtils.encode(query));
 
         resultArticle.setInputMessageContent(text);
         resultArticle.setHideUrl(true);
@@ -297,21 +300,6 @@ public class Meowbot extends TelegramLongPollingBot {
         answerInlineQuery.setResults(resultList);
         try {
             sendApiMethod(answerInlineQuery);
-        } catch (TelegramApiException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void pingPong(Update update) {
-        String text = update.getMessage().getText();
-        long chatId = update.getMessage().getChatId();
-
-        try {
-            SendMessage sendMessage = new SendMessage();
-            sendMessage.setChatId(String.valueOf(chatId));
-            sendMessage.setText(text);
-
-            execute(sendMessage);
         } catch (TelegramApiException e) {
             e.printStackTrace();
         }

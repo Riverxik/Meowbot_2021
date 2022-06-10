@@ -111,22 +111,18 @@ public class Weather {
     }
 
     private void calculateWindDirection(int degrees) {
-        if (degrees >= 0 && degrees < 45)
-            this.windDirection = "Северный";
-        if (degrees >= 45 && degrees < 90)
-            this.windDirection = "Северо-восточный";
-        if (degrees >= 90 && degrees < 135)
-            this.windDirection = "Восточный";
-        if (degrees >= 135 && degrees < 180)
-            this.windDirection = "Юго-восточный";
-        if (degrees >= 180 && degrees < 225)
-            this.windDirection = "Южный";
-        if (degrees >= 225 && degrees < 270)
-            this.windDirection = "Юго-западный";
-        if (degrees >= 270 && degrees < 315)
-            this.windDirection = "Западный";
-        if (degrees >= 315 && degrees < 360)
-            this.windDirection = "Северо-западный";
+        int part = degrees / 45;
+        switch (part) {
+            default:
+            case 0: this.windDirection = "Северный"; break;
+            case 1: this.windDirection = "Северо-восточный"; break;
+            case 2: this.windDirection = "Восточный"; break;
+            case 3: this.windDirection = "Юго-восточный"; break;
+            case 4: this.windDirection = "Южный"; break;
+            case 5: this.windDirection = "Юго-западный"; break;
+            case 6: this.windDirection = "Западный"; break;
+            case 7: this.windDirection = "Северо-западный"; break;
+        }
     }
 
     public String getMainWeather() {

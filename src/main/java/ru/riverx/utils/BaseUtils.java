@@ -3,7 +3,7 @@ package ru.riverx.utils;
 /**
  * Created by RiVeRx on 28.04.2021.
  */
-public class Utils {
+public class BaseUtils {
     public static String encode(String line) {
         char[] symbols = line.toCharArray();
         StringBuilder result = new StringBuilder();
