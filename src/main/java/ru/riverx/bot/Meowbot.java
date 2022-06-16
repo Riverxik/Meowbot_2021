@@ -44,6 +44,7 @@ public class Meowbot extends TelegramLongPollingBot {
     private static String botUsername;
     private static String botToken;
     private final List<BotExtension> extensionList;
+    public List<BotExtension> getExtensionList() { return this.extensionList; }
 
     public Meowbot(DefaultBotOptions botOptions) {
         super(botOptions);

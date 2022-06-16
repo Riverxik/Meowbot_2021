@@ -20,6 +20,8 @@ public class Application {
     private final static String PROXY_HOST = "159.8.114.37";
     private final static int PROXY_PORT = 80;
 
+    public static Meowbot meowbot;
+
     public static void main(String[] args) {
         log.info("Application has been started!");
 
@@ -66,6 +68,7 @@ public class Application {
             botOptions.setProxyPort(Application.PROXY_PORT);
             botOptions.setProxyType(DefaultBotOptions.ProxyType.HTTP);
         }
-        telegramBotsApi.registerBot(new Meowbot(botOptions));
+        meowbot = new Meowbot(botOptions);
+        telegramBotsApi.registerBot(meowbot);
     }
 }
