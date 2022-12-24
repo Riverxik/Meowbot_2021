@@ -10,9 +10,12 @@ import static org.junit.Assert.assertTrue;
 
 public class ChatTextExtensionTest {
     private static ChatTextExtension ext;
+
     @BeforeClass
     public static void setUp() {
-        Application.main(new String[]{"true"});
+        if (Application.meowbot == null) {
+            Application.main(new String[]{"true"});
+        }
         for (BotExtension extension : Application.meowbot.getExtensionList()) {
             if (extension instanceof ChatTextExtension) {
                 ext = (ChatTextExtension) extension;

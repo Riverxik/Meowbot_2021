@@ -20,9 +20,10 @@ public class HappyGraphExtensionTest {
     private static HappyGraphExtension ext;
 
     @BeforeClass
-    public static void setUp() throws InterruptedException {
-        Thread.sleep(1000);
-        Application.main(new String[]{"true"});
+    public static void setUp() {
+        if (Application.meowbot == null) {
+            Application.main(new String[]{"true"});
+        }
         for (BotExtension extension : Application.meowbot.getExtensionList()) {
             if (extension instanceof HappyGraphExtension) {
                 ext = (HappyGraphExtension) extension;
