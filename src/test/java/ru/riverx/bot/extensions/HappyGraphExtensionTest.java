@@ -9,6 +9,9 @@ import ru.riverx.Application;
 import ru.riverx.bot.Meowbot;
 import ru.riverx.utils.Database;
 
+import java.io.File;
+import java.io.IOException;
+
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -59,13 +62,17 @@ public class HappyGraphExtensionTest {
     }
 
     @Test
-    public void executeTestEmptyFile() {
+    public void executeTestEmptyFile() throws IOException {
+        boolean result = false;
         Database.filePath = "test.txt";
         // Создать файл
-        // TODO: Дописать тест.
-        // Попробовать записать в новый файл.
-        boolean result = ext.execute(Meowbot.CREATOR_CHAT_ID, "/newValue 1");
+        File file = new File(Database.filePath);
+        if (file.createNewFile()) {
+            // Попробовать записать в новый файл.
+            result = ext.execute(Meowbot.CREATOR_CHAT_ID, "/newValue 1");
+        }
         // Удалить файл.
+        result &= file.delete();
         assertTrue(result);
     }
 }
