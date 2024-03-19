@@ -12,7 +12,7 @@ public class LogExtension implements BotExtension {
     @Override
     public boolean executeIfValid(Update update) {
         // For text.
-        if (update.hasMessage() && update.getMessage().hasText()) {
+        if (update.hasMessage() & update.getMessage().hasText()) {
             long chatId = update.getMessage().getChatId();
             String msg = update.getMessage().getText();
             log.info(String.format("[Meow]<--[%d][%s]", chatId, msg));

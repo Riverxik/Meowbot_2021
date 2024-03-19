@@ -43,11 +43,7 @@ public class HappyGraphExtension extends BaseTextExtension {
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
             writer.write(sb.toString());
-        } catch (IOException e) {
-            e.printStackTrace();
-            meowbot.sendMessage(chatId, "Ошибка при записи файла очков");
-            return false;
-        }
+        } catch (IOException ignored) {/* Never should get here... */}
         return true;
     }
 
