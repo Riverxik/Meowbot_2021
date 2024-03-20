@@ -9,7 +9,8 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKe
 import ru.riverx.bot.Meowbot;
 
 import java.io.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class KoreanWordExtension extends BaseTextExtension {
     private static final Logger log = LoggerFactory.getLogger(KoreanWordExtension.class);
@@ -18,6 +19,7 @@ public class KoreanWordExtension extends BaseTextExtension {
     private static final String FILE_PATH = "words.mw";
     private static final String CONTINUE = "Продолжить";
     private static final String END = "Закончить";
+    private static final String EXT_UID = "KoreanWord";
     private boolean isAddingNewWords = false;
     private List<String> wordKeys;
     private List<String> wordValues;
@@ -69,7 +71,7 @@ public class KoreanWordExtension extends BaseTextExtension {
         ArrayList<List<InlineKeyboardButton>> buttonRows = new ArrayList<>();
         int ind = 0;
         for (String text : words) {
-            buttons.add(InlineKeyboardButton.builder().callbackData(text).text(text).build());
+            buttons.add(InlineKeyboardButton.builder().callbackData(EXT_UID+text).text(text).build());
             ind++;
             if (ind > 1) {
                 ind = 0;
@@ -134,7 +136,7 @@ public class KoreanWordExtension extends BaseTextExtension {
     }
 
     private void executeCallback(Long chatId, Integer messageId, CallbackQuery callbackQuery) {
-        String userChoice = callbackQuery.getData();
+        String userChoice = callbackQuery.getData().replaceAll(EXT_UID, "");
         if (userChoice.equalsIgnoreCase(CONTINUE)) {
             generateQuestion(chatId.toString(), messageId);
         } else if (userChoice.equalsIgnoreCase(END)) {
@@ -151,10 +153,12 @@ public class KoreanWordExtension extends BaseTextExtension {
     @Override
     public boolean executeIfValid(Update update) {
         if (update.hasCallbackQuery()) {
-            Integer messageId = update.getCallbackQuery().getMessage().getMessageId();
-            Long chatId = update.getCallbackQuery().getMessage().getChatId();
-            executeCallback(chatId, messageId, update.getCallbackQuery());
-            return true;
+            if (update.getCallbackQuery().getData().startsWith(EXT_UID)) {
+                Integer messageId = update.getCallbackQuery().getMessage().getMessageId();
+                Long chatId = update.getCallbackQuery().getMessage().getChatId();
+                executeCallback(chatId, messageId, update.getCallbackQuery());
+                return true;
+            }
         } else {
             Long chatId = update.getMessage().getChatId();
             if (chatId == Meowbot.CREATOR_CHAT_ID) {

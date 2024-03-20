@@ -51,6 +51,7 @@ public class Meowbot extends TelegramLongPollingBot {
         this.extensionList = new ArrayList<>();
         this.extensionList.add(new LogExtension());
         this.extensionList.add(new CommandsExtension(this));
+        this.extensionList.add(new Minesweeper(this));
         this.extensionList.add(new KoreanWordExtension(this));
         this.extensionList.add(new ChatTextExtension(this));
         this.extensionList.add(new WeatherExtension(this));
